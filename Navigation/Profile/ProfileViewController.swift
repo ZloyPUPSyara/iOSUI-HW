@@ -93,13 +93,13 @@ class ProfileViewController: UIViewController {
             profileLabele.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 11),
             profileLabele.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 16),
             profileLabele.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1/2),
-            profileLabele.heightAnchor.constraint(equalToConstant: 50),
             
     // setup button
             
             statusButton.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16),
             statusButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             statusButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            statusButton.heightAnchor.constraint(equalToConstant: 50),
             
     // setup text
             
