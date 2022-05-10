@@ -11,7 +11,6 @@ class ProfileViewController: UIViewController {
     
     private lazy var profileHeader: ProfileHeaderView = {
         let profileHeader = ProfileHeaderView()
-        profileHeader.frame = view.bounds
         profileHeader.backgroundColor = .lightGray
         return profileHeader
     }()
@@ -23,6 +22,6 @@ class ProfileViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         view.addSubview(profileHeader)
-
+        profileHeader.frame = view.bounds
     }
 }
