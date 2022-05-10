@@ -9,12 +9,10 @@ import UIKit
 
 class ProfileHeaderView: UIView {
         
-    let screenWidth = UIScreen.main.bounds.width
-    let screenHeight = UIScreen.main.bounds.height
 
-    let imageView: UIImageView = {
+    lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.frame = CGRect(x: 16, y: 16, width: 100, height: 100)
+        imageView.frame = CGRect(x: 16, y: 92 + 16, width: 100, height: 100)
         imageView.image = UIImage(named: "Evelynn_0")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -23,18 +21,18 @@ class ProfileHeaderView: UIView {
         return imageView
     }()
 
-    let profileLabele: UILabel = {
+    lazy var profileLabele: UILabel = {
         let profileLabel = UILabel()
-        profileLabel.frame = CGRect(x: 146, y: 27, width: 100, height: 30)
+        profileLabel.frame = CGRect(x: 146, y: 92 + 27, width: 100, height: 30)
         profileLabel.text = "Evelynn"
         profileLabel.font = UIFont.boldSystemFont(ofSize: 18)
         return profileLabel
     }()
 
-    var statusButton: UIButton = {
+    lazy var statusButton: UIButton = {
        let statusButton = UIButton()
         let screenWidth = UIScreen.main.bounds.width
-        statusButton.frame = CGRect(x: 16, y: 132, width: screenWidth - 32, height: 50)
+        statusButton.frame = CGRect(x: 16, y: 92 + 132, width: screenWidth - 32, height: 50)
         statusButton.addTarget(self, action: #selector(tapStatusButtonAction), for: .touchUpInside)
        statusButton.backgroundColor = .black
        statusButton.layer.cornerRadius = 20
@@ -52,7 +50,7 @@ class ProfileHeaderView: UIView {
     lazy var statusField: UITextField = {
         let statusField = UITextField()
         let screenWidth = UIScreen.main.bounds.width
-        statusField.frame = CGRect(x: 146, y: 68, width: screenWidth - 162, height: 30)
+        statusField.frame = CGRect(x: 146, y: 92 + 68, width: screenWidth - 162, height: 30)
         statusField.text = "Тут что-то должно появиться"
         statusField.textColor = .darkGray
        return statusField
