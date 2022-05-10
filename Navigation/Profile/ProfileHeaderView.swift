@@ -15,10 +15,10 @@ class ProfileHeaderView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("error")
+        fatalError("init(coder:) has not been implemented")
     }
 
-    let imageView: UIImageView = {
+    lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Evelynn_0")
         imageView.contentMode = .scaleAspectFill
@@ -32,7 +32,7 @@ class ProfileHeaderView: UIView {
         return imageView
     }()
 
-    let profileLabele: UILabel = {
+    lazy var profileLabele: UILabel = {
         let profileLabel = UILabel()
         profileLabel.text = "Evelynn"
         profileLabel.font = UIFont.boldSystemFont(ofSize: 18)
@@ -42,7 +42,7 @@ class ProfileHeaderView: UIView {
         return profileLabel
     }()
 
-    var statusButton: UIButton = {
+    lazy var statusButton: UIButton = {
         let statusButton = UIButton()
         statusButton.addTarget(self, action: #selector(tapStatusButtonAction), for: .touchUpInside)
         statusButton.backgroundColor = .black
@@ -87,7 +87,7 @@ class ProfileHeaderView: UIView {
 //setup label
             
             profileLabele.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 11),
-            profileLabele.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 16),
+            profileLabele.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 20),
             profileLabele.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/2),
             
 // setup button
