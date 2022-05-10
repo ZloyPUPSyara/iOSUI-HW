@@ -9,15 +9,9 @@ import UIKit
 
 struct Post {
     var title: String
-    
-    init (title: String) {
-        self.title = title
-    }
 }
 
 class PostViewController: UIViewController {
-    
-    var post: Post?
     
     override func viewDidLoad() {
         super.viewDidLoad()
