@@ -14,10 +14,12 @@ class ProfileViewController: UIViewController {
     private func layout() {
         profileHeader.translatesAutoresizingMaskIntoConstraints = false
         
-        profileHeader.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        profileHeader.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        profileHeader.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        profileHeader.heightAnchor.constraint(equalToConstant: 700).isActive = true
+        NSLayoutConstraint.activate([
+            profileHeader.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            profileHeader.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            profileHeader.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            profileHeader.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
     
     override func viewDidLoad() {

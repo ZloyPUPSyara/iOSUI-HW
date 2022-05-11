@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B233C2B32829889000BB0570 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B233C2B22829889000BB0570 /* SceneDelegate.swift */; };
+		B233C2B528298D4200BB0570 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B233C2B428298D4200BB0570 /* LogInViewController.swift */; };
 		B242ED11281FC76E00FCE02A /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B242ED10281FC76E00FCE02A /* ProfileHeaderView.swift */; };
 		B2EF217E2819C96700949A94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EF217D2819C96700949A94 /* AppDelegate.swift */; };
 		B2EF21822819C96700949A94 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EF21812819C96700949A94 /* FeedViewController.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		B233C2B22829889000BB0570 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		B233C2B428298D4200BB0570 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		B242ED10281FC76E00FCE02A /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		B2EF217A2819C96700949A94 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2EF217D2819C96700949A94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -50,6 +52,7 @@
 			children = (
 				B242ED10281FC76E00FCE02A /* ProfileHeaderView.swift */,
 				B2EF2193281D29AC00949A94 /* ProfileViewController.swift */,
+				B233C2B428298D4200BB0570 /* LogInViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -159,6 +162,7 @@
 			files = (
 				B2EF21822819C96700949A94 /* FeedViewController.swift in Sources */,
 				B2EF217E2819C96700949A94 /* AppDelegate.swift in Sources */,
+				B233C2B528298D4200BB0570 /* LogInViewController.swift in Sources */,
 				B2EF2194281D29AC00949A94 /* ProfileViewController.swift in Sources */,
 				B2EF2192281D28FA00949A94 /* MainTabBarController.swift in Sources */,
 				B242ED11281FC76E00FCE02A /* ProfileHeaderView.swift in Sources */,
@@ -311,6 +315,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -340,6 +345,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
