@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "League_of_Legends_Riot_Games_sugar_Evelynn_League_of_Legends_Evelynn_braum_braum_shield_Ziggs-1723139.jpg!d.jpeg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

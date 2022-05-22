@@ -12,10 +12,11 @@ class ProfileHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         layout()
+        backgroundColor = .white
     }
-    
+
     required init?(coder: NSCoder) {
-        fatalError("error")
+        fatalError("init(coder:) has not been implemented")
     }
 
     let imageView: UIImageView = {

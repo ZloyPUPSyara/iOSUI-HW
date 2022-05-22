@@ -86,8 +86,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.navigationController?.isNavigationBarHidden = true
         layoutLogInView()
+        navigationController?.isNavigationBarHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,6 +100,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         super.viewDidDisappear(animated)
         nc.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         nc.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        navigationController?.isNavigationBarHidden = false
     }
     
     @objc private func kbdShow(notification: NSNotification) {
