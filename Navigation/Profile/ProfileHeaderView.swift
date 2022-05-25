@@ -97,6 +97,7 @@ class ProfileHeaderView: UIView {
             statusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             statusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             statusButton.heightAnchor.constraint(equalToConstant: 50),
+            statusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16),
             
 // setup text
             
