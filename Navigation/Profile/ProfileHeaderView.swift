@@ -35,6 +35,8 @@ class ProfileHeaderView: UIView {
         return avatarView
     }()
     
+// MARK: - closeImageButton + closeImageAction
+    
     private lazy var closeImageButton: UIButton = {
         let closeImageButton = UIButton()
         closeImageButton.setImage(UIImage(systemName: "multiply.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40))?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
@@ -126,10 +128,11 @@ class ProfileHeaderView: UIView {
        return statusField
     }()
     
+// MARK: - Animation
+    
     private func setupGestures() {
         let tapAvatarGesture = UITapGestureRecognizer(target: self, action: #selector(tapAvatarAction))
         imageView.addGestureRecognizer(tapAvatarGesture)
-        addSubview(avatarView)
     }
     
     @objc func tapAvatarAction() {
@@ -137,24 +140,9 @@ class ProfileHeaderView: UIView {
         self.avatarImagePosition = self.imageView.layer.position
         self.avatarImageBounds = self.imageView.layer.bounds
         
-        addSubview(closeImageButton)
-        bringSubviewToFront(imageView)
-        
-        NSLayoutConstraint.activate([
-            closeImageButton.trailingAnchor.constraint(equalTo: trailingAnchor),
-            closeImageButton.topAnchor.constraint(equalTo: topAnchor),
-            
-            imageView.topAnchor.constraint(equalTo: topAnchor, constant: UIScreen.main.bounds.width / 2),
-            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-//            imageView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
-            imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: UIScreen.main.bounds.width / 2)
-            
-        ])
-        
         UIImageView.animate(withDuration: 0.5,
                             animations: {
-            self.imageView.center = CGPoint(x: UIScreen.main.bounds.midX, y: (UIScreen.main.bounds.midY))
+            self.imageView.layer.position = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY - 70 ) 
             self.avatarView.alpha = 0.8
             self.imageView.layer.bounds = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
             self.imageView.layer.cornerRadius = 0
@@ -171,12 +159,17 @@ class ProfileHeaderView: UIView {
             }
         })
     }
+    
+// MARK: - layout
 
     private func layout() {
 
-        [ imageView, profileLabele, statusButton, statusField] .forEach{addSubview($0)}
+        [profileLabele, statusButton, statusField, avatarView, imageView, closeImageButton] .forEach{addSubview($0)}
         
         NSLayoutConstraint.activate([
+            
+            closeImageButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+            closeImageButton.topAnchor.constraint(equalTo: topAnchor),
             
             
 //setup image
