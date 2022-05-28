@@ -9,6 +9,9 @@ import UIKit
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
     
+    private lazy var login = "1"
+    private lazy var password = "1"
+    
     private let nc = NotificationCenter.default
     
     private let scrollView: UIScrollView = {
@@ -79,8 +82,27 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     }()
     
     @objc func tapLogInAction() {
-        let profileVC = ProfileViewController()
-        navigationController?.pushViewController(profileVC, animated: true)
+        if emailTextField.text == login && passwordTextField.text == password {
+            
+            let profileVC = ProfileViewController()
+            navigationController?.pushViewController(profileVC, animated: true)
+            
+        } else {
+            let animation = CABasicAnimation(keyPath: "position")
+            animation.duration = 0.05
+            animation.repeatCount = 3
+            animation.autoreverses = true
+            animation.fromValue = NSValue(cgPoint: CGPoint(x: emailTextField.center.x - 5, y: emailTextField.center.y))
+            animation.toValue = NSValue(cgPoint: CGPoint(x: emailTextField.center.x + 5, y: emailTextField.center.y))
+            emailTextField.layer.add(animation, forKey: "position")
+            
+            animation.fromValue = NSValue(cgPoint: CGPoint(x: passwordTextField.center.x - 5, y: passwordTextField.center.y))
+            animation.toValue = NSValue(cgPoint: CGPoint(x: passwordTextField.center.x + 5, y: passwordTextField.center.y))
+            passwordTextField.layer.add(animation, forKey: "position")
+            
+            emailTextField.layer.borderColor = UIColor.red.cgColor
+            passwordTextField.layer.borderColor = UIColor.red.cgColor
+        }
     }
 
     override func viewDidLoad() {

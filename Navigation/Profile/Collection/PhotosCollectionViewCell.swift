@@ -9,6 +9,8 @@ import UIKit
 
 class PhotosCollectionViewCell: UICollectionViewCell {
     
+    weak var buttonPhotoCellDelegate: PhotoCellDelegate?
+    
     private let imageCollectionCell: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
@@ -21,10 +23,21 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         layout()
+        setupGestures()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupGestures() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(photoAction))
+        imageCollectionCell.addGestureRecognizer(tapGesture)
+        imageCollectionCell.isUserInteractionEnabled = true
+    }
+    
+    @objc private func photoAction() {
+        buttonPhotoCellDelegate?.tapPhotoAction(photo: imageCollectionCell.image!)
     }
     
     func setupCollectionCell(_ post: CollectionModel){
@@ -40,4 +53,9 @@ class PhotosCollectionViewCell: UICollectionViewCell {
             imageCollectionCell.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
             ])
     }
+}
+
+protocol PhotoCellDelegate: AnyObject {
+    func  tapPhotoAction(photo: UIImage)
+    func  closeImageButton()
 }

@@ -8,6 +8,9 @@
 import UIKit
 
 class CastomTableViewCell: UITableViewCell {
+     
+    
+    private var modelPostCounter = PostModel(author: "", description: "", image: UIImage(named:"League-of-Legends-фэндомы-Ashe-Ahri-6814581")!, likes: 0, views: 0)
 
     private let postView: UIView = {
         let postView = UIView()
@@ -30,8 +33,6 @@ class CastomTableViewCell: UITableViewCell {
         nameLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         nameLabel.numberOfLines = 2
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        nameLabel.text = "text label for post"
         return nameLabel
     }()
     
@@ -47,6 +48,7 @@ class CastomTableViewCell: UITableViewCell {
     private let likesLabel: UILabel = {
         let likesLabel = UILabel()
         likesLabel.font = UIFont.systemFont(ofSize: 16)
+        likesLabel.isUserInteractionEnabled = true
         likesLabel.translatesAutoresizingMaskIntoConstraints = false
         return likesLabel
     }()
@@ -61,10 +63,46 @@ class CastomTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layout()
+        setupGestures()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupGestures() {
+        
+        let tapLikeGesture = UITapGestureRecognizer(target: self, action: #selector(likeAction))
+        likesLabel.addGestureRecognizer(tapLikeGesture)
+        
+        let tapPostImageViewGesture = UITapGestureRecognizer(target: self, action: #selector(postImageViewAction))
+        postImageView.addGestureRecognizer(tapPostImageViewGesture)
+        
+    }
+    
+    @objc private func likeAction() {
+        UIView.animate(withDuration: 0.5,
+                       delay: 0.0,
+                       usingSpringWithDamping: 1.0,
+                       initialSpringVelocity: 0.0,
+                       options: .curveEaseInOut) {
+            
+            self.modelPostCounter.likes += 1
+            self.likesLabel.text = "Likes: \(self.modelPostCounter.likes)"
+        }
+    }
+    
+    @objc private func postImageViewAction() {
+        UIView.animate(withDuration: 0.5,
+                       delay: 0.0,
+                       usingSpringWithDamping: 1.0,
+                       initialSpringVelocity: 0.0,
+                       options: .curveEaseInOut) {
+            
+            self.modelPostCounter.views += 1
+            self.viewsLabel.text = "Views: \(self.modelPostCounter.views)"
+            
+        }
     }
     
     func setupCell(_ model: PostModel) {
@@ -107,6 +145,8 @@ class CastomTableViewCell: UITableViewCell {
             viewsLabel.trailingAnchor.constraint(equalTo: postView.trailingAnchor, constant: -16),
             viewsLabel.bottomAnchor.constraint(equalTo: postView.bottomAnchor, constant: -16)
             
+            
         ])
     }
 }
+
