@@ -50,20 +50,6 @@ class DetailPostViewController: UIViewController {
         return descriptionLabel
     }()
     
-    private let likesLabel: UILabel = {
-        let likesLabel = UILabel()
-        likesLabel.font = UIFont.systemFont(ofSize: 16)
-        likesLabel.translatesAutoresizingMaskIntoConstraints = false
-        return likesLabel
-    }()
-    
-    private let viewsLabel: UILabel = {
-        let viewsLabel = UILabel()
-        viewsLabel.font = UIFont.systemFont(ofSize: 16)
-        viewsLabel.translatesAutoresizingMaskIntoConstraints = false
-        return viewsLabel
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -75,14 +61,12 @@ class DetailPostViewController: UIViewController {
         postImageView.image = model.image
         nameLabel.text = model.author
         descriptionLabel.text = model.description
-        likesLabel.text = "Likes: \(model.likes)"
-        viewsLabel.text = "Views: \(model.views)"
     }
     
     private func layout() {
         view.addSubview(scrollView)
         scrollView.addSubview(postView)
-        [postImageView, nameLabel, descriptionLabel, likesLabel, viewsLabel].forEach{ postView.addSubview($0) }
+        [postImageView, nameLabel, descriptionLabel].forEach{ postView.addSubview($0) }
         
         let screenWidth = UIScreen.main.bounds.width
         
@@ -112,15 +96,7 @@ class DetailPostViewController: UIViewController {
             
             descriptionLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: 16),
             descriptionLabel.leadingAnchor.constraint(equalTo: postView.leadingAnchor, constant: 16),
-            descriptionLabel.trailingAnchor.constraint(equalTo: postView.trailingAnchor, constant: -16),
-            
-            likesLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
-            likesLabel.leadingAnchor.constraint(equalTo: postView.leadingAnchor, constant: 16),
-            likesLabel.bottomAnchor.constraint(equalTo: postView.bottomAnchor, constant: -16),
-            
-            viewsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
-            viewsLabel.trailingAnchor.constraint(equalTo: postView.trailingAnchor, constant: -16),
-            viewsLabel.bottomAnchor.constraint(equalTo: postView.bottomAnchor, constant: -16)
+            descriptionLabel.trailingAnchor.constraint(equalTo: postView.trailingAnchor, constant: -16)
             
         ])
     }

@@ -114,6 +114,10 @@ extension ProfileViewController: UITableViewDelegate{
         }
         
         else{
+            let cell = tableView.cellForRow(at: indexPath) as! CastomTableViewCell
+            cell.modelPostCounter.views += 1
+            cell.viewsLabel.text = "Views: \(cell.modelPostCounter.views)"
+            
             let detailPost = DetailPostViewController()
             detailPost.setupCell(postModel[indexPath.row])
             navigationController?.pushViewController(detailPost, animated: true)

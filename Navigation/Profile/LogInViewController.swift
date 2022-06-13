@@ -9,8 +9,8 @@ import UIKit
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
     
-    private lazy var login = "1"
-    private lazy var password = "1"
+    private lazy var login = "1111"
+    private lazy var password = "1111"
     
     private let nc = NotificationCenter.default
     
@@ -81,13 +81,24 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return logInButton
     }()
     
+    lazy var warningMessage: UILabel = {
+        let warningMessage = UILabel()
+        warningMessage.text = ""
+        warningMessage.textColor = .red
+        warningMessage.font = UIFont.systemFont(ofSize: 12)
+        
+        warningMessage.translatesAutoresizingMaskIntoConstraints = false
+        return warningMessage
+    }()
+    
     @objc func tapLogInAction() {
-        if emailTextField.text == login && passwordTextField.text == password {
+        
+        if emailTextField.text == "" || passwordTextField.text == "" {
             
-            let profileVC = ProfileViewController()
-            navigationController?.pushViewController(profileVC, animated: true)
+            if passwordTextField.text?.count ?? 0 < 4 {
+                warningMessage.text = "Пароль должен содержать не менее 4 символов"
+            }
             
-        } else {
             let animation = CABasicAnimation(keyPath: "position")
             animation.duration = 0.05
             animation.repeatCount = 3
@@ -95,14 +106,33 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             animation.fromValue = NSValue(cgPoint: CGPoint(x: emailTextField.center.x - 5, y: emailTextField.center.y))
             animation.toValue = NSValue(cgPoint: CGPoint(x: emailTextField.center.x + 5, y: emailTextField.center.y))
             emailTextField.layer.add(animation, forKey: "position")
-            
+
             animation.fromValue = NSValue(cgPoint: CGPoint(x: passwordTextField.center.x - 5, y: passwordTextField.center.y))
             animation.toValue = NSValue(cgPoint: CGPoint(x: passwordTextField.center.x + 5, y: passwordTextField.center.y))
             passwordTextField.layer.add(animation, forKey: "position")
+
+            emailTextField.layer.borderColor = UIColor.red.cgColor
+            passwordTextField.layer.borderColor = UIColor.red.cgColor
+            
+            return
+            
+        } else if emailTextField.text != password || passwordTextField.text != login {
             
             emailTextField.layer.borderColor = UIColor.red.cgColor
             passwordTextField.layer.borderColor = UIColor.red.cgColor
+            
+            let alert = UIAlertController(title: "Предупреждение", message: "Неверный логин или пароль", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OК", style: .default)
+            alert.addAction(okAction)
+            present(alert, animated: true)
+            
+            return
         }
+        
+        let profileVC = ProfileViewController()
+        navigationController?.pushViewController(profileVC, animated: true)
+        
+
     }
 
     override func viewDidLoad() {
@@ -140,7 +170,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     private func layoutLogInView() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        [logInImage, emailTextField, passwordTextField, logInButton].forEach{contentView.addSubview($0)}
+        [logInImage, emailTextField, passwordTextField, logInButton, warningMessage].forEach{contentView.addSubview($0)}
         
         NSLayoutConstraint.activate([
             
@@ -180,7 +210,13 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             logInButton.leadingAnchor.constraint(equalTo: passwordTextField.leadingAnchor),
             logInButton.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
-            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+//warningMessage
+            warningMessage.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor),
+            warningMessage.leadingAnchor.constraint(equalTo: passwordTextField.leadingAnchor),
+            warningMessage.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor),
+            warningMessage.bottomAnchor.constraint(equalTo: logInButton.topAnchor)
         ])
     }
 }

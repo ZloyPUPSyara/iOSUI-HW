@@ -34,8 +34,7 @@ class ProfileHeaderView: UIView {
         
         return avatarView
     }()
-    
-// MARK: - closeImageButton + closeImageAction
+
     
     private lazy var closeImageButton: UIButton = {
         let closeImageButton = UIButton()
@@ -50,29 +49,7 @@ class ProfileHeaderView: UIView {
         return closeImageButton
     }()
     
-    @objc private func closeImageAction() {
-        UIView.animate(withDuration: 0.3,
-                       delay: 0.0,
-                       usingSpringWithDamping: 1.0,
-                       initialSpringVelocity: 0.0,
-                       options: .curveEaseInOut) {
-            self.closeImageButton.alpha = 0
-            self.closeImageButton.isUserInteractionEnabled = false
-        } completion: { _ in
-            UIView.animate(withDuration: 0.5,
-                           delay: 0.0) {
-                self.avatarView.alpha = 0.0
-                self.imageView.layer.position = self.avatarImagePosition
-                self.imageView.layer.bounds = self.avatarImageBounds
-                self.imageView.layer.cornerRadius = self.imageView.bounds.width / 2
-                self.imageView.layer.borderWidth = 3
-                self.imageView.isUserInteractionEnabled = true
-                self.statusButton.isUserInteractionEnabled = true
-                self.statusField.isUserInteractionEnabled = true
-                self.layoutIfNeeded()
-            }
-        }
-    }
+    
 
     let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -108,25 +85,69 @@ class ProfileHeaderView: UIView {
         statusButton.layer.shadowRadius = 4
         statusButton.layer.shadowColor = UIColor.black.cgColor
         statusButton.layer.shadowOpacity = 0.7
-        statusButton.setTitle("Проверить статус", for: .normal)
+        statusButton.setTitle("Установить статус", for: .normal)
         
         statusButton.translatesAutoresizingMaskIntoConstraints = false
         
         return statusButton
     }()
-   @objc private func tapStatusButtonAction() {
-       statusField.text = "А вот и я"
-   }
 
     lazy var statusField: UITextField = {
         let statusField = UITextField()
-        statusField.text = "Тут что-то должно появиться"
+        statusField.text = "Тут что-то есть"
         statusField.textColor = .darkGray
         
         statusField.translatesAutoresizingMaskIntoConstraints = false
         
        return statusField
     }()
+    
+    var setStatusField: UITextField = {
+        let setStatusField = UITextField()
+        setStatusField.backgroundColor = .systemGray6
+        setStatusField.layer.borderWidth = 0.5
+        setStatusField.layer.borderColor = UIColor.gray.cgColor
+        setStatusField.placeholder = "Add status"
+        setStatusField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: setStatusField.frame.height))
+        setStatusField.leftViewMode = .always
+        
+        setStatusField.translatesAutoresizingMaskIntoConstraints = false
+        
+        return setStatusField
+    }()
+    
+    @objc private func closeImageAction() {
+        UIView.animate(withDuration: 0.3,
+                       delay: 0.0,
+                       usingSpringWithDamping: 1.0,
+                       initialSpringVelocity: 0.0,
+                       options: .curveEaseInOut) {
+            self.closeImageButton.alpha = 0
+            self.closeImageButton.isUserInteractionEnabled = false
+        } completion: { _ in
+            UIView.animate(withDuration: 0.5,
+                           delay: 0.0) {
+                self.avatarView.alpha = 0.0
+                self.imageView.layer.position = self.avatarImagePosition
+                self.imageView.layer.bounds = self.avatarImageBounds
+                self.imageView.layer.cornerRadius = self.imageView.bounds.width / 2
+                self.imageView.layer.borderWidth = 3
+                self.imageView.isUserInteractionEnabled = true
+                self.statusButton.isUserInteractionEnabled = true
+                self.statusField.isUserInteractionEnabled = true
+                self.layoutIfNeeded()
+            }
+        }
+    }
+    
+    @objc private func tapStatusButtonAction() {
+        if setStatusField.text != "" {
+            statusField.text = setStatusField.text
+        } else {
+            setStatusField.attributedPlaceholder = NSAttributedString(string: "Установите статус", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+        }
+    }
+    
     
 // MARK: - Animation
     
@@ -164,7 +185,7 @@ class ProfileHeaderView: UIView {
 
     private func layout() {
 
-        [profileLabele, statusButton, statusField, avatarView, imageView, closeImageButton] .forEach{addSubview($0)}
+        [profileLabele, statusButton, statusField, setStatusField, avatarView, imageView, closeImageButton] .forEach{addSubview($0)}
         
         NSLayoutConstraint.activate([
             
@@ -195,9 +216,16 @@ class ProfileHeaderView: UIView {
             
 // setup text
             
-            statusField.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -34),
+            statusField.topAnchor.constraint(equalTo: profileLabele.bottomAnchor, constant: 16),
             statusField.leadingAnchor.constraint(equalTo: profileLabele.leadingAnchor),
-            statusField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
+            statusField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            
+//setup textfield
+            
+            setStatusField.topAnchor.constraint(equalTo: statusField.bottomAnchor, constant: 16),
+            setStatusField.leadingAnchor.constraint(equalTo: profileLabele.leadingAnchor),
+            setStatusField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            
             ])
     }
 }

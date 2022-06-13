@@ -8,9 +8,8 @@
 import UIKit
 
 class CastomTableViewCell: UITableViewCell {
-     
     
-    private var modelPostCounter = PostModel(author: "", description: "", image: UIImage(named:"League-of-Legends-фэндомы-Ashe-Ahri-6814581")!, likes: 0, views: 0)
+    var modelPostCounter = PostModel(author: "", description: "", image: UIImage(named:"League-of-Legends-фэндомы-Ashe-Ahri-6814581"), likes: 0, views: 0)
 
     private let postView: UIView = {
         let postView = UIView()
@@ -24,6 +23,7 @@ class CastomTableViewCell: UITableViewCell {
         postImageView.backgroundColor = .black
         postImageView.contentMode = .scaleAspectFill
         postImageView.clipsToBounds = true
+        postImageView.isUserInteractionEnabled = true
         postImageView.translatesAutoresizingMaskIntoConstraints = false
         return postImageView
     }()
@@ -53,7 +53,7 @@ class CastomTableViewCell: UITableViewCell {
         return likesLabel
     }()
     
-    private let viewsLabel: UILabel = {
+    let viewsLabel: UILabel = {
         let viewsLabel = UILabel()
         viewsLabel.font = UIFont.systemFont(ofSize: 16)
         viewsLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -75,9 +75,6 @@ class CastomTableViewCell: UITableViewCell {
         let tapLikeGesture = UITapGestureRecognizer(target: self, action: #selector(likeAction))
         likesLabel.addGestureRecognizer(tapLikeGesture)
         
-        let tapPostImageViewGesture = UITapGestureRecognizer(target: self, action: #selector(postImageViewAction))
-        postImageView.addGestureRecognizer(tapPostImageViewGesture)
-        
     }
     
     @objc private func likeAction() {
@@ -89,19 +86,6 @@ class CastomTableViewCell: UITableViewCell {
             
             self.modelPostCounter.likes += 1
             self.likesLabel.text = "Likes: \(self.modelPostCounter.likes)"
-        }
-    }
-    
-    @objc private func postImageViewAction() {
-        UIView.animate(withDuration: 0.5,
-                       delay: 0.0,
-                       usingSpringWithDamping: 1.0,
-                       initialSpringVelocity: 0.0,
-                       options: .curveEaseInOut) {
-            
-            self.modelPostCounter.views += 1
-            self.viewsLabel.text = "Views: \(self.modelPostCounter.views)"
-            
         }
     }
     
@@ -149,4 +133,3 @@ class CastomTableViewCell: UITableViewCell {
         ])
     }
 }
-
